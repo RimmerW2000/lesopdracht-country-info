@@ -550,12 +550,35 @@ function getAllCountries(countries) {
     countries.map((allCountries)=>{
         const countryList = document.createElement('li');
         countryList.innerHTML = `
-            <img src="${allCountries.flag}" class="flag"/>          
-            <h3 class="${allCountries.region}">${allCountries.name}</h3>
+            <img src="${allCountries.flags.png}" class="flag" width="40px" height="30px"/>          
+            <h3 class="${allCountries.region}" >${allCountries.name}</h3>
             <p>has a population of ${allCountries.population} people</p>
         `;
         countryUnorderedList.appendChild(countryList);
     });
+}
+function getRegionColour(regionName) {
+    let regionColour = "";
+    switch(regionName){
+        case 'Asia':
+            regionColour = 'Asia';
+            break;
+        case 'Europe':
+            regionColour = 'Europe';
+            break;
+        case 'Americas':
+            regionColour = 'Americas';
+            break;
+        case 'Africa':
+            regionColour = 'Africa';
+            break;
+        case 'Oceania':
+            regionColour = 'Oceania';
+            break;
+        default:
+            regionColour = 'Rest';
+    }
+    return regionColour;
 }
 
 },{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"1IeuP":[function(require,module,exports) {

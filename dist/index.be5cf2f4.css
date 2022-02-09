@@ -1,9 +1,42 @@
-/*ul{*/
-/*    list-style-type: none;*/
-/*}*/
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+}
 
-/*h1 {*/
-/*    font-family: fantasy, cursive;*/
-/*    text-align: center;*/
-/*}*/
+ul{
+    list-style-type: none;
+    flex-basis: 350px;
+    flex-grow: 1;
+}
+
+h1 {
+    font-family: 'fantasy', cursive;
+    text-align: center;
+    color: yellow;
+}
+
+body{
+    background-color: blueviolet;
+}
+
+#Europe{
+    color: yellow;
+}
+#Asia{
+    color: red;
+}
+#Americas{
+    color: green;
+}
+#Oceania{
+    color: blueviolet;
+}
+#Africa{
+    color: blue;
+}
+#Rest{
+    color: saddlebrown;
+}
 /*# sourceMappingURL=index.be5cf2f4.css.map */
