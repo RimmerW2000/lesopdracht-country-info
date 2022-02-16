@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import axios from 'axios';
 // Opdracht Plan bedenken:
 //     Alle landen in een lijst
 // naam, vlag, hoeveelheid inwoners
@@ -77,45 +78,107 @@ import axios from 'axios';
 //
 // Tonen
 
-async function getCountries() {
+// async function getCountries() {
+//     try {
+//         const result = await axios.get('https://restcountries.com/v2/all')
+//         console.log(result.data)
+//
+//         result.data.sort((a, b) => {
+//             return a.population - b.population;
+//         })
+//
+//         getAllCountries(result.data)
+//
+//     } catch (e) {
+//         console.error(e)
+//     }
+// }
+//
+// getCountries();
+//
+//
+// function getAllCountries(countries) {
+//     const countryUnorderedList = document.getElementById("countryList");
+//     countries.map((allCountries) => {
+//
+//         const countryList = document.createElement('li');
+//         countryList.innerHTML = `
+//             <img src="${allCountries.flags.png}" class="flag" width="40px" height="30px"/>
+//             <h3 class="${allCountries.region}" >${allCountries.name}</h3>
+//             <p>has a population of ${allCountries.population} people</p>
+//         `
+//         countryUnorderedList.appendChild(countryList);
+//
+//     })
+// }
+//
+// function getRegionColour(regionName) {
+//
+//     let regionColour = "";
+//     switch (regionName) {
+//         case 'Asia':
+//             regionColour = 'Asia';
+//             break;
+//         case 'Europe':
+//             regionColour = 'Europe';
+//             break;
+//         case 'Americas':
+//             regionColour = 'Americas';
+//             break;
+//         case 'Africa':
+//             regionColour = 'Africa';
+//             break;
+//         case 'Oceania':
+//             regionColour = 'Oceania';
+//             break;
+//         default:
+//             regionColour = 'Rest'
+//     }
+//
+//     return regionColour;
+// }
+
+
+async function fetchCountries() {
     try {
-        const result = await axios.get('https://restcountries.com/v2/all')
-        console.log(result.data)
+        const result = await axios.get('https://restcountries.com/v2/all/');
 
-        result.data.sort((a, b) => {
-            return a.population - b.population;
-        })
+        const sortedResult = result.data;
+        sortedResult.sort((a,b)=> {
+            return a.population - b.population
+        });
 
-        getAllCountries(result.data)
+        const countryListBlock = document.getElementById("ListOfCountries");
+        countryListBlock.innerHTML = listCountryElements(sortedResult);
 
     } catch (e) {
-        console.error(e)
+        console.error(e);
     }
 }
 
-getCountries();
+function listCountryElements(countryArr) {
+    let newCountryList = "<ul style=\"list-style: none;\" class='wrapper'>";
 
+    for (let i = 0; i < countryArr.length; i++) {
+        const { name , population, flags, region } = countryArr[i];
 
-function getAllCountries(countries) {
-    const countryUnorderedList = document.getElementById("countryList");
-    countries.map((allCountries) => {
-
-        const countryList = document.createElement('li');
-        countryList.innerHTML = `
-            <img src="${allCountries.flags.png}" class="flag" width="40px" height="30px"/>          
-            <h3 class="${allCountries.region}" >${allCountries.name}</h3>
-            <p>has a population of ${allCountries.population} people</p>
-        `
-        countryUnorderedList.appendChild(countryList);
-
-    })
+        newCountryList += `
+        <li class='box'>
+        <div class="countryName" id=${(determineRegionColour(region))}>${name}</div> 
+        <img class="flag" src=${flags.png} alt="flag">
+        <div class="population">Has a population of ${population} people</div>
+        </li>`;
+    }
+    newCountryList += "</ul>";
+    return newCountryList
 }
 
-function getRegionColour(regionName) {
+function determineRegionColour(regionName) {
 
     let regionColour = "";
     switch (regionName) {
         case 'Asia':
+            console.log('Asia');
             regionColour = 'Asia';
             break;
         case 'Europe':
@@ -133,9 +196,9 @@ function getRegionColour(regionName) {
         default:
             regionColour = 'Rest'
     }
-
     return regionColour;
 }
 
+fetchCountries();
 
 
